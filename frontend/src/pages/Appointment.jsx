@@ -113,10 +113,10 @@ const Appointment = () => {
 
             {/* --------- Doctor About --------- */}
             <div>
-              <p className="flex items-center gap-1 text-sm text-sm font-medium text-gray-900 mt-3">
+              <p className="flex items-center gap-1 text-sm font-medium text-gray-900 mt-3">
                 About <img src={assetsFrontend.info_icon} alt="" />
               </p>
-              <p className="text-sm text-gray-500 max-w-[700px] mt-1">
+              <p className="text-sm text-gray-500 max-w-[175] mt-1">
                 {docInfo.about}
               </p>
             </div>
