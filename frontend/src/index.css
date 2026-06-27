@@ -1,0 +1,20 @@
+@import "tailwindcss";
+
+@theme {
+  --color-primary: #00A1B0;
+  --color-secondary: #f59e0b;
+  --color-accent: #10b981;
+  
+}
+
+.active hr {
+  @apply block;
+}
+
+::-webkit-scrollbar {
+  @apply hidden;
+}
+
+@theme {
+  --grid-template-columns-auto: repeat(auto-fill, minmax(200px, 1fr));
+}
