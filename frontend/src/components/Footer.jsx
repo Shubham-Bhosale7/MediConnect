@@ -4,22 +4,20 @@ import { assets } from "../assets/assets_admin/assets";
 
 const Footer = () => {
   return (
-    <div className="md:mx-10">
-      <div className="flex flex-col sm:grid grid-cols-[3fr_1fr_1fr] gap-14 my-10 mt-40 text-sm">
+    <div className="rounded-b-3xl bg-white/70 px-4 py-6 md:mx-10 md:px-0">
+      <div className="my-10 mt-20 flex flex-col gap-14 text-sm sm:grid sm:grid-cols-[3fr_1fr_1fr]">
         {/* ------ Left Section -------*/}
         <div>
           <img className="mb-5 w-40" src={assets.logo} alt="" />
-          <p className="w-full md:w-2/3 text-gray-600 leading-6">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Iste velit
-            iusto numquam eius rem? Praesentium, iusto sapiente! Doloribus
-            expedita provident perspiciatis enim dolores officiis sapiente?
-            Libero aspernatur eum repudiandae praesentium?
+          <p className="w-full leading-7 text-gray-600 md:w-2/3">
+            MediConnect helps patients discover trusted care, book appointments
+            quickly, and stay organized with a seamless digital experience.
           </p>
         </div>
 
         {/* ------ Centor Section -------*/}
         <div>
-          <p className="text-xl font-medium mb-5">COMPANY</p>
+          <p className="mb-5 text-xl font-semibold">Company</p>
           <ul className="flex flex-col gap-2 text-gray-600">
             <li>Home</li>
             <li>About us</li>
@@ -30,19 +28,19 @@ const Footer = () => {
 
         {/* ------ Right Section -------*/}
         <div>
-          <p className="text-xl font-medium mb-5">GET In TOUCH</p>
+          <p className="mb-5 text-xl font-semibold">Get in touch</p>
           <ul className="flex flex-col gap-2 text-gray-600">
             <li>+1-212-456-7890</li>
-            <li>mediconnect@gmail.com </li>
+            <li>mediconnect@gmail.com</li>
           </ul>
         </div>
       </div>
 
       {/* ------- Copyright Text --------*/}
       <div>
-        <hr />
-        <p className="py-5 text-sm text-center">
-          Copyright 2024 @ MediConnect.in - All Right Reserved.
+        <hr className="border-gray-200" />
+        <p className="py-5 text-center text-sm text-gray-500">
+          Copyright 2024 © MediConnect.in - All Rights Reserved.
         </p>
       </div>
     </div>

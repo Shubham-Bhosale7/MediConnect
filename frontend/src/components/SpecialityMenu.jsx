@@ -8,16 +8,20 @@ const SpecialityMenu = () => {
       className="flex flex-col items-center gap-4 py-16 text-gray-800"
       id="speciality"
     >
-      <h1 className="text-3xl font-medium">Find by Speciality</h1>
-      <p classname="sm:w-1/3 text-center text-sm">
-        Simply browse through our extensive list of trusted doctors, schedule
-        your appointment hassle-free
+      <h1 className="text-3xl font-semibold">Find by specialty</h1>
+      <p className="text-center text-sm text-gray-600 sm:w-1/2">
+        Explore leading specialists and choose the care that fits your needs.
       </p>
-      <div className="flex sm:justify-center gap-4 pt-5 w-full overflow-scroll">
+      <div className="flex w-full gap-4 overflow-x-auto pt-5 sm:justify-center">
         {specialityData.map((item, index) => (
-          <Link onClick={() => scrollTo(0, 0)} className="flex flex-col items-center text-xs cursor-pointer flex-shrink-0 hover:translate-y-[-10px] transition-all duration-500" key={index} to={`/doctors/${item.speciality}`}>
-            <img className="w-16 sm:w-24 mb-2" src={item.image} alt="" />
-            <p>{item.speciality}</p>
+          <Link
+            onClick={() => scrollTo(0, 0)}
+            className="flex shrink-0 cursor-pointer flex-col items-center rounded-2xl border border-gray-200 bg-white px-4 py-4 text-xs shadow-sm transition-all duration-500 hover:-translate-y-2.5 hover:shadow-md"
+            key={index}
+            to={`/doctors/${item.speciality}`}
+          >
+            <img className="mb-2 w-16 sm:w-24" src={item.image} alt="" />
+            <p className="font-medium text-gray-700">{item.speciality}</p>
           </Link>
         ))}
       </div>
