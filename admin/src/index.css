@@ -5,3 +5,7 @@
   --color-secondary: #f59e0b;
   --color-accent: #10b981;
 }
+
+::-webkit-scrollbar {
+  @apply hidden;
+}

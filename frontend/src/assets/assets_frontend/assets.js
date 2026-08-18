@@ -111,7 +111,7 @@ export const doctors = [
         fees: 60,
         address: {
             line1: '27th Cross, Richmond',
-            line2: 'Circle, Ring Road, London'
+            line2: ''
         }
     },
     {
