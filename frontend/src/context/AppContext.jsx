@@ -9,19 +9,14 @@ const AppContextProvider = (props) => {
   const backendUrl = import.meta.env.VITE_BACKEND_URL;
 
   const [doctors, setDoctors] = useState([]);
+  const [token, setToken] = useState(
+    localStorage.getItem("token") ? localStorage.getItem("token") : false,
+  );
 
   const [email, setEmail] = useState("");
   const [name, setName] = useState("");
 
   // whatever we add in this value obj we can access in any component
-  const value = {
-    doctors,
-    currencySymbol,
-    email,
-    setEmail,
-    name,
-    setName,
-  };
 
   const getDoctorsData = async () => {
     try {
@@ -35,6 +30,18 @@ const AppContextProvider = (props) => {
       console.log(error);
       toast.error(error.message);
     }
+  };
+
+  const value = {
+    doctors,
+    currencySymbol,
+    email,
+    setEmail,
+    name,
+    setName,
+    token,
+    setToken,
+    backendUrl,
   };
 
   useEffect(() => {
