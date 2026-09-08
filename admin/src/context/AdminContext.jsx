@@ -47,14 +47,14 @@ const AdminContextProvider = (props) => {
       toast.error(error.message);
     }
   };
-  
+
   const value = {
     aToken,
     setAToken,
     backendUrl,
     doctors,
     getAllDoctors,
-    changeAvailability
+    changeAvailability,
   };
 
   return (
