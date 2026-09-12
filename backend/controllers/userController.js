@@ -5,6 +5,9 @@ import jwt from "jsonwebtoken";
 import { v2 as cloudinary } from "cloudinary";
 import doctorModel from "../models/doctorModel.js";
 import appointmentModel from "../models/appointmentModel.js";
+import appointmentId from "../server.js";
+import app from "../server.js";
+
 // API to register user
 const registerUser = async (req, res) => {
   try {
@@ -174,14 +177,56 @@ const listAppointments = async (req, res) => {
     const userId = req.userId;
     console.log(userId);
 
-    const appointments = await appointmentModel.find({userId});
- 
-    res.json({ success: true, appointments});
+    const appointments = await appointmentModel.find({ userId });
 
+    res.json({ success: true, appointments });
   } catch (error) {
     console.log(error);
     res.json({ success: false, message: error.message });
   }
-}
+};
 
-export { registerUser, loginUser, getProfile, updateProfile, bookAppointment, listAppointments };
+// API to cancel appointment
+const cancelAppointment = async (req, res) => {
+  try {
+    const { appointmentId } = req.body;
+    console.log(appointmentId);
+    const userId = req.userId;
+
+    const appointmentData = await appointmentModel.findById(appointmentId);
+    // verify appointment user
+    if (appointmentData.userId !== userId) {
+      return res.json({ success: false, message: "Unauthorized action" });
+    }
+
+    await appointmentModel.findByIdAndUpdate(appointmentId, {
+      cancelled: true,
+    });
+
+    // releasing doctor slot
+    const { docId, slotDate, slotTime } = appointmentData;
+    const docData = await doctorModel.findById(docId);
+
+    let slots_booked = docData.slots_booked;
+
+    slots_booked[slotDate] = slots_booked[slotDate].filter(
+      (e) => e !== slotTime,
+    );
+    await doctorModel.findByIdAndUpdate(docId, { slots_booked });
+
+    res.json({ success: true, message: "Appointment cancelled" });
+  } catch (error) {
+    console.log(error);
+    res.json({ success: false, message: error.message });
+  }
+};
+
+export {
+  registerUser,
+  loginUser,
+  getProfile,
+  updateProfile,
+  bookAppointment,
+  listAppointments,
+  cancelAppointment,
+};

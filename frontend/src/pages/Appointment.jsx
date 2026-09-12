@@ -9,8 +9,14 @@ import axios from "axios";
 
 const Appointment = () => {
   const { docId } = useParams();
-  const { doctors, currencySymbol, backendUrl, token, getDoctorsData, getUserAppointments } =
-    useContext(AppContext);
+  const {
+    doctors,
+    currencySymbol,
+    backendUrl,
+    token,
+    getDoctorsData,
+    getUserAppointments,
+  } = useContext(AppContext);
   const daysOfWeek = ["SUN", "MON", "TUE", "WED", "THU", "FRI", "SAT"];
 
   const navigate = useNavigate();
@@ -64,7 +70,7 @@ const Appointment = () => {
         let month = currentDate.getMonth() + 1;
         let year = currentDate.getFullYear();
 
-        const slotDate = day + "_" + month + "_" + "_" + year;
+        const slotDate = day + "_" + month + "_" +  year;
         const slotTime = formattedTime;
 
         const isSlotAvailable =
@@ -73,6 +79,7 @@ const Appointment = () => {
             ? false
             : true;
 
+        console.log(isSlotAvailable);
         if (isSlotAvailable) {
           // add slot to array
           timeSlots.push({
