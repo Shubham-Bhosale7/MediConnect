@@ -81,18 +81,22 @@ const Login = () => {
   return (
     <form
       onSubmit={onSubmitHandler}
-      className="min-h-[80vh] flex items-center"
-      action=""
+      className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-50 px-4 py-8 flex items-center justify-center sm:px-6 lg:px-8"
     >
-      <div className="flex flex-col gap-3 m-auto items-start p-8 min-w-[85] sm:min-w-96 border border-xl text-zinc-600 text-sm shadow-lg">
-        <p className="text-2xl font-semibold">{role} Login</p>
-        <div className="grid w-full grid-cols-3 gap-2">
+      <div className="m-auto w-full max-w-md rounded-2xl border border-slate-200 bg-white p-8 text-sm text-slate-700 shadow-[0_12px_35px_rgba(95,111,255,0.15)]">
+        <p className="mb-6 text-center text-3xl font-semibold text-slate-800">
+          <span className="text-primary">
+            {state === "Sign Up" ? "Create Account" : role}
+          </span>
+          {state === "Sign Up" ? "" : " Login"}
+        </p>
+        <div className="mb-6 grid w-full grid-cols-3 gap-2">
           {["Admin", "Doctor", "User"].map((selectedRole) => (
             <button
               key={selectedRole}
               type="button"
               onClick={() => selectRole(selectedRole)}
-              className={`rounded border px-2 py-2 ${role === selectedRole ? "border-primary bg-primary text-white" : "border-zinc-300"}`}
+              className={`rounded-lg border px-2 py-2 text-sm ${role === selectedRole ? "border-primary bg-primary text-white" : "border-slate-300 text-slate-600"}`}
             >
               {selectedRole}
             </button>
@@ -111,16 +115,16 @@ const Login = () => {
           </button>
         ) : (
           <>
-            <p>
-              Please {state === "Sign Up" ? "sign up" : "login"} to book
+            <p className="mb-4 text-slate-600">
+              Please {state === "Sign Up" ? "sign up" : "login"} to book an
               appointment
             </p>
 
             {state === "Sign Up" ? (
-              <div className="w-full">
-                <p>Full Name</p>
+              <div className="mb-4 w-full">
+                <p className="mb-2 font-medium text-slate-700">Full Name</p>
                 <input
-                  className="border border-zinc-300 rounded w-full p-2 mt-1"
+                  className="w-full rounded-xl border border-slate-300 px-4 py-3 outline-none transition focus:border-primary focus:ring-2 focus:ring-primary/20"
                   onChange={(e) => setName(e.target.value)}
                   type="text"
                   required
@@ -131,10 +135,10 @@ const Login = () => {
               <></>
             )}
 
-            <div className="w-full">
-              <p>Email</p>
+            <div className="mb-4 w-full">
+              <p className="mb-2 font-medium text-slate-700">Email</p>
               <input
-                className="border border-zinc-300 rounded w-full p-2 mt-1"
+                className="w-full rounded-xl border border-slate-300 px-4 py-3 outline-none transition focus:border-primary focus:ring-2 focus:ring-primary/20"
                 onChange={(e) => setEmail(e.target.value)}
                 type="email"
                 required
@@ -142,10 +146,10 @@ const Login = () => {
               />
             </div>
 
-            <div className="w-full">
-              <p>Password</p>
+            <div className="mb-6 w-full">
+              <p className="mb-2 font-medium text-slate-700">Password</p>
               <input
-                className="border border-zinc-300 rounded w-full p-2 mt-1"
+                className="w-full rounded-xl border border-slate-300 px-4 py-3 outline-none transition focus:border-primary focus:ring-2 focus:ring-primary/20"
                 onChange={(e) => setPassword(e.target.value)}
                 type="password"
                 required
@@ -155,7 +159,7 @@ const Login = () => {
 
             <button
               type="submit"
-              className="bg-primary text-white w-full py-2 rounded-md text-base"
+              className="w-full rounded-xl bg-primary py-3 font-semibold text-white transition"
             >
               {state === "Sign Up" ? "Create Account" : "Login"}
             </button>
@@ -164,7 +168,7 @@ const Login = () => {
               <p>
                 Already have an account?{" "}
                 <span
-                  className="text-primary underline cursor-pointer"
+                  className="cursor-pointer text-primary underline"
                   onClick={() => setState("Login")}
                 >
                   Login here
@@ -174,7 +178,7 @@ const Login = () => {
               <p>
                 Create a new account?{" "}
                 <span
-                  className="text-primary underline cursor-pointer"
+                  className="cursor-pointer text-primary underline"
                   onClick={() => setState("Sign Up")}
                 >
                   Register here
