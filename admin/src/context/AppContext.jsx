@@ -5,10 +5,26 @@ export const AppContext = createContext();
 const AppContextProvider = (props) => {
   const currency = "$";
   const calculateAge = (dob) => {
-    const today = new Date();
-    const birthDate = new Date(dob);
+    if (!dob) return "N/A";
 
-    let age = today.getFullYear - birthDate.getFullYear;
+    const birthDate = new Date(dob);
+    const today = new Date();
+
+    if (isNaN(birthDate.getTime())) {
+      return "N/A";
+    }
+
+    let age = today.getF ullYear() - birthDate.getFullYear();
+
+    const monthDifference = today.getMonth() - birthDate.getMonth();
+
+    if (
+      monthDifference < 0 ||
+      (monthDifference === 0 && today.getDate() < birthDate.getDate())
+    ) {
+      age--;
+    }
+
     return age;
   };
 
@@ -38,7 +54,7 @@ const AppContextProvider = (props) => {
   const value = {
     calculateAge,
     slotDateFormat,
-    currency
+    currency,
   };
 
   return (

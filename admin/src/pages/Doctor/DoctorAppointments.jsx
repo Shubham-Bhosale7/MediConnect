@@ -21,12 +21,6 @@ const DoctorAppointments = () => {
     }
   }, [dToken]);
 
-  useEffect(() => {
-    if (dToken) {
-      completeAppointment();
-    }
-  }, [dToken, appointments]);
-
   return (
     <div className="min-h-screen flex-1 min-w-0 overflow-hidden bg-gray-50 p-2 sm:p-6 lg:p-8">
       <p className="mb-4 text-lg font-semibold text-gray-800 sm:mb-6 sm:text-2xl">
@@ -44,7 +38,7 @@ const DoctorAppointments = () => {
           <p>Action</p>
         </div>
 
-        {appointments.reverse().map((item, index) => (
+        {[...appointments].reverse().map((item, index) => (
           <div
             key={index}
             className="grid min-w-0 grid-cols-[minmax(0,1fr)_auto] items-center gap-2 border-t border-gray-200 px-3 py-3 text-xs leading-5 text-gray-600 transition-colors hover:bg-gray-50 sm:min-w-190 sm:grid-cols-[0.4fr_1.6fr_1fr_0.8fr_1.5fr_0.8fr_1fr] sm:gap-4 sm:px-5 sm:py-4 sm:text-sm"
@@ -72,6 +66,7 @@ const DoctorAppointments = () => {
               </p>
             </div>
             <p className="hidden whitespace-nowrap sm:block">
+              {console.log("DOB:", item.userData.dob)}
               {calculateAge(item.userData.dob)}
             </p>
             <p className="hidden whitespace-nowrap sm:block">
@@ -82,9 +77,13 @@ const DoctorAppointments = () => {
               {item.amount}
             </p>
             {item.cancelled ? (
-              <p className="justify-self-center text-xs font-medium text-red-500">Cancelled</p>
+              <p className="justify-self-center text-xs font-medium text-red-500">
+                Cancelled
+              </p>
             ) : item.isCompleted ? (
-              <p className="justify-self-center text-xs font-medium text-green-500">Completed</p>
+              <p className="justify-self-center text-xs font-medium text-green-500">
+                Completed
+              </p>
             ) : (
               <div className="flex items-center justify-self-end gap-2 sm:justify-self-auto sm:gap-3">
                 <img
