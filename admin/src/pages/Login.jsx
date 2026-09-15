@@ -14,7 +14,8 @@ const Login = () => {
   const { setAToken, backendUrl } = useContext(AdminContext);
   const { setDToken } = useContext(DoctorContext);
   const frontendUrl =
-    import.meta.env.VITE_FRONTEND_URL || window.location.origin;
+    import.meta.env.VITE_FRONTEND_URL ||
+    (import.meta.env.DEV ? "http://localhost:5173" : window.location.origin);
 
   const clearOtherTokens = () => {
     setAToken("");

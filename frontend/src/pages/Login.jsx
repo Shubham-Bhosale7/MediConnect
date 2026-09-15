@@ -13,7 +13,10 @@ const Login = () => {
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
   const adminUrl =
-    import.meta.env.VITE_ADMIN_URL || `${window.location.origin}/admin`;
+    import.meta.env.VITE_ADMIN_URL ||
+    (import.meta.env.DEV
+      ? "http://localhost:5174"
+      : `${window.location.origin}/admin`);
 
   const selectRole = (selectedRole) => {
     if (selectedRole !== "User") {
