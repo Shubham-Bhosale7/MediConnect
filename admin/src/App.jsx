@@ -18,7 +18,7 @@ const App = () => {
   const { aToken } = useContext(AdminContext);
   const { dToken } = useContext(DoctorContext);
 
-  return aToken || dToken ? (
+  return aToken ? (
     <div className="bg-[#F8F9FD]">
       <ToastContainer />
       <NavBar />
@@ -26,12 +26,23 @@ const App = () => {
         <SideBar />
         <Routes>
           {/* Admin Route */}
-          <Route path="/" element={<></>} />
+          <Route path="/" element={<Dashboard />} />
           <Route path="/admin-dashboard" element={<Dashboard />} />
           <Route path="/all-appointments" element={<AllAppointments />} />
           <Route path="/add-doctor" element={<AddDoctor />} />
           <Route path="/doctors-list" element={<DoctorsList />} />
-
+        </Routes>
+      </div>
+    </div>
+  ) : dToken ? (
+    <div className="bg-[#F8F9FD]">
+      <ToastContainer />
+      <NavBar />
+      <div className="flex items-start">
+        <SideBar />
+        <Routes>
+          {/* Admin Route */}
+          <Route path="/" element={<DoctorDashboard />} />
           {/* Doctor Route */}
           <Route path="/doctor-dashboard" element={<DoctorDashboard />} />
           <Route path="/doctor-appointments" element={<DoctorAppointments />} />
@@ -40,7 +51,7 @@ const App = () => {
       </div>
     </div>
   ) : (
-    <>
+     <>
       <Login></Login>
       <ToastContainer />
     </>
