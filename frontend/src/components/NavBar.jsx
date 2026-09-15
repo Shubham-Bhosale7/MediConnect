@@ -14,18 +14,27 @@ const NavBar = () => {
   const handleLogout = () => {
     navigate(`/`);
     setToken(false);
-    localStorage.removeItem('token')
+    localStorage.removeItem("token");
+    localStorage.removeItem("aToken");
+    localStorage.removeItem("dToken");
     closeMenu();
   };
 
   return (
     <div className="flex items-center justify-between text-sm py-2 mb-2 border-b border-b-gray-400 px-4 md:px-0">
-      <img
-        onClick={() => navigate("/")}
-        src={assets.logo}
-        className="w-32 sm:w-40 md:w-50 h-auto cursor-pointer"
-        alt="logo"
-      />
+      <div className="flex items-center gap-2">
+        <img
+          onClick={() => navigate("/")}
+          src={assets.logo}
+          className="w-32 sm:w-40 md:w-50 h-auto cursor-pointer"
+          alt="logo"
+        />
+        {token && (
+          <span className="rounded-full border border-gray-500 px-2.5 py-0.5 text-xs text-gray-600">
+            User
+          </span>
+        )}
+      </div>
 
       <ul className="hidden md:flex items-start gap-5 font-medium">
         <NavLink to={"/"} className="flex flex-col items-center">
