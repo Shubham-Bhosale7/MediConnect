@@ -80,11 +80,17 @@ const Dashboard = () => {
                   <p className="truncate font-medium text-gray-800">
                     {item.docData.name}
                   </p>
-                  <p className="mt-1 text-sm text-gray-500">{slotDateFormat(item.slotDate)}</p>
+                  <p className="mt-1 text-sm text-gray-500">
+                    {slotDateFormat(item.slotDate)}
+                  </p>
                 </div>
                 {item.cancelled ? (
-                  <p className="w-20 text-center text-xs font-medium text-red-500">
+                  <p className="justify-self-center text-xs font-medium text-red-500">
                     Cancelled
+                  </p>
+                ) : item.isCompleted ? (
+                  <p className="justify-self-center text-xs font-medium text-green-500">
+                    Completed
                   </p>
                 ) : (
                   <img

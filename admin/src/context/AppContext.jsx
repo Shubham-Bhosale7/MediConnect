@@ -14,7 +14,7 @@ const AppContextProvider = (props) => {
       return "N/A";
     }
 
-    let age = today.getF ullYear() - birthDate.getFullYear();
+    let age = today.getFullYear() - birthDate.getFullYear();
 
     const monthDifference = today.getMonth() - birthDate.getMonth();
 

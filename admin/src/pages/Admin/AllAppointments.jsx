@@ -29,7 +29,7 @@ const AllAppointments = () => {
           <p>Fees</p>
           <p>Actions</p>
         </div>
-        {appointments.map((item, index) => (
+        {[...appointments].reverse().map((item, index) => (
           <div
             key={index}
             className="grid min-w-[760px] grid-cols-[0.4fr_1.6fr_0.8fr_1.5fr_1.6fr_0.8fr_1fr] items-center gap-4 border-t border-gray-200 px-5 py-4 text-sm text-gray-600"
@@ -68,6 +68,10 @@ const AllAppointments = () => {
             {item.cancelled ? (
               <p className="justify-self-center text-xs font-medium text-red-500">
                 Cancelled
+              </p>
+            ) : item.isCompleted ? (
+              <p className="justify-self-center text-xs font-medium text-green-500">
+                Completed
               </p>
             ) : (
               <img
