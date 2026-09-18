@@ -1,37 +1,35 @@
-import { useContext, useState } from "react";
+import { useContext, useState, useEffect } from "react";
 import { AdminContext } from "../context/AdminContext";
 import axios from "axios";
 import { toast } from "react-toastify";
 import { DoctorContext } from "../context/DoctorContext";
-import { useLocation } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const Login = () => {
-  const location = useLocation();
-  const [state, setState] = useState(location.state?.role || "Admin");
+  const [state, setState] = useState("Admin");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const { setAToken, backendUrl } = useContext(AdminContext);
-  const { setDToken } = useContext(DoctorContext);
-  const frontendUrl =
-    import.meta.env.VITE_FRONTEND_URL ||
-    (import.meta.env.DEV ? "http://localhost:5173" : window.location.origin);
+  const { setAToken, backendUrl, aToken } = useContext(AdminContext);
+  const { setDToken, dToken } = useContext(DoctorContext);
+
+  const navigate = useNavigate();
+
+  // useEffect(() => {
+  //   if (aToken) {
+  //     navigate("/admin-dashboard");
+  //   } else if (dToken) {
+      
+  //   } else {
+  //     navigate("/login");
+  //   }
+  // }, [token]);
 
   const clearOtherTokens = () => {
     setAToken("");
     setDToken("");
     localStorage.removeItem("aToken");
     localStorage.removeItem("dToken");
-    localStorage.removeItem("token");
-  };
-
-  const selectRole = (role) => {
-    if (role === "User") {
-      window.location.href = `${frontendUrl}/login`;
-      return;
-    }
-
-    setState(role);
   };
 
   const onSuubmitHandler = async (event) => {
@@ -46,7 +44,8 @@ const Login = () => {
         if (data.success) {
           clearOtherTokens();
           localStorage.setItem("aToken", data.token);
-          setAToken(data.token);
+          await setAToken(data.token);
+           navigate("/admin-dashboard");
         } else {
           toast.error(data.message);
         }
@@ -59,7 +58,8 @@ const Login = () => {
         if (data.success) {
           clearOtherTokens();
           localStorage.setItem("dToken", data.token);
-          setDToken(data.token);
+          await setDToken(data.token);
+          navigate("/doctor-dashboard");
         } else {
           toast.error(data.message);
         }
@@ -76,18 +76,6 @@ const Login = () => {
         <p className="mb-6 text-center text-3xl font-semibold text-slate-800">
           <span className="text-primary">{state}</span> Login
         </p>
-        <div className="mb-6 grid grid-cols-3 gap-2">
-          {["Admin", "Doctor", "User"].map((role) => (
-            <button
-              key={role}
-              type="button"
-              onClick={() => selectRole(role)}
-              className={`rounded-lg border px-2 py-2 text-sm ${state === role ? "border-primary bg-primary text-white" : "border-slate-300 text-slate-600"}`}
-            >
-              {role}
-            </button>
-          ))}
-        </div>
         <div className="mb-4">
           <p className="mb-2 text-sm font-medium text-slate-700">Email</p>
           <input
@@ -95,6 +83,8 @@ const Login = () => {
             value={email}
             type="email"
             required
+            name=""
+            id=""
             className="w-full rounded-xl border border-slate-300 px-4 py-3 text-sm outline-none transition focus:border-primary focus:ring-2 focus:ring-primary/20"
           />
         </div>
@@ -105,12 +95,35 @@ const Login = () => {
             value={password}
             type="password"
             required
+            name=""
+            id=""
             className="w-full rounded-xl border border-slate-300 px-4 py-3 text-sm outline-none transition focus:border-primary focus:ring-2 focus:ring-primary/20"
           />
         </div>
-        <button className="w-full rounded-xl bg-primary py-3 font-semibold text-white transition">
+        <button className="w-full rounded-xl bg-primary py-3 font-semibold text-white transition ">
           Login
         </button>
+        {state === "Admin" ? (
+          <p>
+            Doctor Login?{" "}
+            <span
+              className="text-primary underline cursor-pointer"
+              onClick={() => setState("Doctor")}
+            >
+              Click here
+            </span>
+          </p>
+        ) : (
+          <p>
+            Admin Login?{" "}
+            <span
+              className="text-primary underline cursor-pointer"
+              onClick={() => setState("Admin")}
+            >
+              Click here
+            </span>
+          </p>
+        )}
       </div>
     </form>
   );

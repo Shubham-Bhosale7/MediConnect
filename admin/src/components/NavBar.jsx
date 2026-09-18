@@ -16,32 +16,15 @@ const NavBar = () => {
     aToken && localStorage.removeItem("aToken");
     dToken && setDToken("");
     dToken && localStorage.removeItem("dToken");
-    localStorage.removeItem("token");
-  };
-
-  const switchRole = () => {
-    const nextRole = aToken ? "Doctor" : "Admin";
-
-    aToken && setAToken("");
-    aToken && localStorage.removeItem("aToken");
-    dToken && setDToken("");
-    dToken && localStorage.removeItem("dToken");
-    localStorage.removeItem("token");
-    navigate("/", { state: { role: nextRole } });
   };
 
   return (
     <div className="flex justify-between items-center px-4 sm:px-10 py-3 border-b bg-white">
       <div className="flex items-center gap-2 text-xs">
         <img className="w-36 sm:w-40 cursor-pointer" src={assets.logo} alt="" />
-        <button
-          type="button"
-          onClick={switchRole}
-          className="border px-2.5 py-0.5 rounded-full border-gray-500 text-gray-600 hover:bg-gray-100"
-          title="Switch role"
-        >
+        <p className="border px-2.5 py-0.5 rounded-full border-gray-500 text-gray-600">
           {aToken ? "Admin" : "Doctor"}
-        </button>
+        </p>
       </div>
       <button
         onClick={logout}
